@@ -1,0 +1,27 @@
+.beneficiary-portal {
+  min-height: 100vh; display: flex; flex-direction: column;
+}
+.beneficiary-portal__header {
+  background: var(--ink); padding: 4rem 2rem 3rem; text-align: center;
+}
+.beneficiary-portal__logo {
+  font-family: var(--serif); font-size: 18px; color: var(--white); font-style: italic; margin-bottom: 2rem;
+}
+.beneficiary-portal__title {
+  font-family: var(--serif); font-size: 36px; color: var(--white); line-height: 1.1; margin-bottom: 1rem;
+}
+.beneficiary-portal__title em { font-style: italic; color: var(--sage-dark); }
+.beneficiary-portal__desc {
+  font-size: 14px; color: rgba(255,255,255,0.45); max-width: 480px; margin: 0 auto; line-height: 1.7;
+}
+.beneficiary-portal__content {
+  flex: 1; padding: 2rem 1.5rem; max-width: 640px; margin: 0 auto; width: 100%;
+}
+.beneficiary-item { margin-bottom: 10px; }
+.beneficiary-item__top { display: flex; align-items: center; justify-content: space-between; }
+.beneficiary-item__asset { font-size: 14px; font-weight: 500; color: var(--ink); }
+.beneficiary-item__action { font-size: 12px; color: var(--ink-3); opacity: 0.6; margin-top: 2px; }
+.beneficiary-portal__footer {
+  text-align: center; padding: 2rem; background: var(--mist-2);
+}
+.beneficiary-portal__loading { padding: 1rem 0; }

@@ -1,0 +1,15 @@
+.messages-page__header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.25rem; }
+.messages-page__list { margin-top: 1rem; }
+.messages-page__empty {
+  text-align: center; padding: 3rem 1rem; background: var(--white);
+  border: 1px dashed var(--mist-3); border-radius: var(--r-lg); margin-top: 1rem;
+}
+.message-card { margin-bottom: 8px; position: relative; }
+.message-card__top { display: flex; align-items: flex-start; justify-content: space-between; }
+.message-card__subject { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+.message-card__body { font-size: 12px; color: var(--ink-3); opacity: 0.6; margin-top: 8px; line-height: 1.5; }
+.message-card__delete {
+  position: absolute; top: 12px; right: 12px; font-size: 11px;
+  color: var(--ink-3); opacity: 0.4; background: none; border: none; cursor: pointer;
+}
+.message-card__delete:hover { color: var(--rose); opacity: 1; }

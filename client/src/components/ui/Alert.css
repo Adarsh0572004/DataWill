@@ -1,0 +1,46 @@
+.alert {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--r-md);
+  border: 1px solid;
+  margin-bottom: 8px;
+}
+
+.alert__icon {
+  flex-shrink: 0;
+  font-size: 15px;
+  margin-top: 1px;
+  width: 20px;
+  text-align: center;
+}
+
+.alert__title {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.alert__text {
+  font-size: 12px;
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+.alert--sage {
+  background: var(--sage-l);
+  border-color: rgba(61, 122, 86, 0.25);
+  color: var(--sage);
+}
+
+.alert--gold {
+  background: var(--gold-l);
+  border-color: rgba(139, 105, 20, 0.25);
+  color: var(--gold);
+}
+
+.alert--rose {
+  background: var(--rose-l);
+  border-color: rgba(139, 43, 58, 0.25);
+  color: var(--rose);
+}

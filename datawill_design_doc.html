@@ -1,0 +1,669 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0D1117;
+  --ink-2:#1C2333;
+  --ink-3:#2D3748;
+  --mist:#F7F5F0;
+  --mist-2:#EDE9E1;
+  --mist-3:#DDD8CE;
+  --sage:#1A3A2A;
+  --sage-2:#2D5A40;
+  --sage-3:#3D7A56;
+  --sage-l:#E8F2EC;
+  --gold:#8B6914;
+  --gold-2:#B8901C;
+  --gold-l:#FBF4E4;
+  --slate:#2B4068;
+  --slate-2:#3D5A8A;
+  --slate-l:#EAF0FA;
+  --rose:#8B2B3A;
+  --rose-l:#FAE8EB;
+  --white:#FFFFFF;
+  --r-sm:8px;
+  --r-md:14px;
+  --r-lg:20px;
+  --r-xl:28px;
+  --serif:'Instrument Serif',serif;
+  --sans:'DM Sans',sans-serif;
+  --shadow:0 1px 3px rgba(13,17,23,0.08), 0 4px 16px rgba(13,17,23,0.06);
+  --shadow-lg:0 8px 32px rgba(13,17,23,0.12), 0 2px 8px rgba(13,17,23,0.06);
+}
+body{font-family:var(--sans);background:var(--mist);color:var(--ink);font-size:14px;line-height:1.6}
+
+/* ── Layout ── */
+.doc{max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.section{margin-bottom:3.5rem}
+.section-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);opacity:.5;margin-bottom:1.2rem}
+
+/* ── Typography ── */
+h1.doc-title{font-family:var(--serif);font-size:52px;font-weight:400;line-height:1.05;color:var(--ink);margin-bottom:.4rem}
+h1.doc-title em{font-style:italic;color:var(--sage-2)}
+.doc-subtitle{font-family:var(--sans);font-size:15px;color:var(--ink-3);opacity:.6;font-weight:300;margin-bottom:2.5rem}
+h2{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--ink);margin-bottom:.6rem;line-height:1.2}
+h3{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--ink-3);text-transform:uppercase;margin-bottom:.8rem}
+p.body{font-size:14px;color:var(--ink-3);line-height:1.75;margin-bottom:.8rem}
+.serif-quote{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--sage);line-height:1.5;padding:1.2rem 1.5rem;border-left:3px solid var(--sage-3);background:var(--sage-l);border-radius:0 var(--r-sm) var(--r-sm) 0;margin:1rem 0}
+
+/* ── Cards ── */
+.card{background:var(--white);border:1px solid var(--mist-3);border-radius:var(--r-lg);padding:1.5rem;box-shadow:var(--shadow)}
+.card-sm{background:var(--white);border:1px solid var(--mist-3);border-radius:var(--r-md);padding:1.1rem 1.25rem;box-shadow:var(--shadow)}
+.card-dark{background:var(--ink);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-lg);padding:1.5rem;box-shadow:var(--shadow-lg)}
+
+/* ── Grid ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
+/* ── Cover ── */
+.cover{background:var(--ink);border-radius:var(--r-xl);padding:3rem 2.5rem 2.5rem;margin-bottom:3rem;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(61,122,86,.25) 0%,transparent 70%);pointer-events:none}
+.cover::after{content:'';position:absolute;bottom:-60px;left:30%;width:280px;height:280px;background:radial-gradient(circle,rgba(43,64,104,.3) 0%,transparent 70%);pointer-events:none}
+.cover-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(61,122,86,.2);border:1px solid rgba(61,122,86,.35);color:#7AC4A0;font-size:11px;font-weight:500;letter-spacing:.06em;padding:4px 12px;border-radius:20px;margin-bottom:1.5rem}
+.cover-dot{width:6px;height:6px;background:#7AC4A0;border-radius:50%}
+.cover h1{font-family:var(--serif);font-size:56px;font-weight:400;color:var(--white);line-height:1.0;margin-bottom:.5rem}
+.cover h1 em{font-style:italic;color:#7AC4A0}
+.cover-sub{color:rgba(255,255,255,.45);font-size:14px;font-weight:300;margin-bottom:2.5rem;max-width:480px;line-height:1.7}
+.cover-meta{display:flex;gap:2rem;border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem}
+.meta-item .label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px}
+.meta-item .value{font-size:13px;color:rgba(255,255,255,.7);font-weight:400}
+
+/* ── Color Swatches ── */
+.swatch-row{display:flex;gap:8px;margin-bottom:.8rem}
+.swatch{border-radius:var(--r-sm);height:64px;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:8px 10px}
+.swatch .swatch-name{font-size:10px;font-weight:600}
+.swatch .swatch-hex{font-size:9px;opacity:.7;margin-top:1px}
+.swatch-dark .swatch-name,.swatch-dark .swatch-hex{color:rgba(255,255,255,.85)}
+.swatch-light .swatch-name,.swatch-light .swatch-hex{color:rgba(13,17,23,.65)}
+
+/* ── Type Specimen ── */
+.type-row{padding:1.2rem 1.5rem;background:var(--white);border:1px solid var(--mist-3);border-radius:var(--r-md);margin-bottom:8px;display:flex;align-items:baseline;justify-content:space-between;gap:1rem}
+.type-meta{font-size:10px;color:var(--ink-3);opacity:.45;white-space:nowrap;font-family:var(--sans)}
+
+/* ── Spacing Scale ── */
+.spacing-row{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.spacing-bar{background:var(--sage-l);border:1.5px solid var(--sage-3);border-radius:4px;height:20px;flex-shrink:0}
+.spacing-label{font-size:11px;color:var(--ink-3)}
+
+/* ── Component: Button ── */
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--sage-2);color:var(--white);font-family:var(--sans);font-size:14px;font-weight:500;padding:11px 22px;border-radius:var(--r-md);border:none;cursor:pointer;letter-spacing:.01em;transition:all .15s}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--ink);font-family:var(--sans);font-size:14px;font-weight:500;padding:10px 21px;border-radius:var(--r-md);border:1.5px solid var(--mist-3);cursor:pointer}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--sage-2);font-family:var(--sans);font-size:14px;font-weight:500;padding:10px 4px;border:none;cursor:pointer;border-bottom:1.5px solid var(--sage-3)}
+.btn-danger{display:inline-flex;align-items:center;gap:8px;background:var(--rose-l);color:var(--rose);font-family:var(--sans);font-size:14px;font-weight:500;padding:10px 22px;border-radius:var(--r-md);border:1.5px solid rgba(139,43,58,.2);cursor:pointer}
+.btn-dark{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--ink);font-family:var(--sans);font-size:14px;font-weight:500;padding:11px 22px;border-radius:var(--r-md);border:none;cursor:pointer}
+.btns-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* ── Component: Badge ── */
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;letter-spacing:.02em}
+.badge-sage{background:var(--sage-l);color:var(--sage-2)}
+.badge-gold{background:var(--gold-l);color:var(--gold)}
+.badge-slate{background:var(--slate-l);color:var(--slate)}
+.badge-rose{background:var(--rose-l);color:var(--rose)}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+
+/* ── Component: Input ── */
+.input-group{margin-bottom:12px}
+.input-label{font-size:12px;font-weight:500;color:var(--ink-3);margin-bottom:5px;display:block}
+.input{width:100%;padding:10px 14px;border:1.5px solid var(--mist-3);border-radius:var(--r-md);font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--white);outline:none}
+.input:focus{border-color:var(--sage-3);box-shadow:0 0 0 3px rgba(61,122,86,.12)}
+.input-hint{font-size:11px;color:var(--ink-3);opacity:.5;margin-top:4px}
+
+/* ── Component: Stat ── */
+.stat-card{background:var(--white);border:1px solid var(--mist-3);border-radius:var(--r-md);padding:1.2rem;text-align:center}
+.stat-n{font-family:var(--serif);font-size:36px;font-weight:400;color:var(--ink);line-height:1}
+.stat-l{font-size:11px;color:var(--ink-3);opacity:.5;margin-top:4px;font-weight:400}
+
+/* ── Component: Asset Card ── */
+.asset-card{background:var(--white);border:1px solid var(--mist-3);border-radius:var(--r-md);padding:14px 16px;display:flex;align-items:center;gap:12px}
+.asset-icon{width:36px;height:36px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.asset-info{flex:1}
+.asset-name{font-size:13px;font-weight:500;color:var(--ink)}
+.asset-sub{font-size:11px;color:var(--ink-3);opacity:.5;margin-top:1px}
+.asset-status{font-size:11px;font-weight:500}
+
+/* ── Component: Nav ── */
+.nav-demo{background:var(--ink);border-radius:var(--r-lg) var(--r-lg) 0 0;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--serif);font-size:18px;color:var(--white);font-style:italic}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;font-weight:400}
+.nav-links a.active{color:var(--white)}
+.nav-cta{display:flex;gap:8px}
+
+/* ── Component: Hero ── */
+.hero-demo{background:var(--ink);padding:3rem 2rem 2.5rem;border-radius:0 0 var(--r-lg) var(--r-lg)}
+.hero-eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7AC4A0;font-weight:500;margin-bottom:1rem}
+.hero-h{font-family:var(--serif);font-size:44px;line-height:1.05;color:var(--white);margin-bottom:1rem;max-width:520px}
+.hero-h em{font-style:italic;color:#7AC4A0}
+.hero-body{font-size:15px;color:rgba(255,255,255,.5);line-height:1.75;max-width:420px;margin-bottom:2rem;font-weight:300}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ── Component: Feature Card ── */
+.feature-card{background:var(--ink-2);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-md);padding:1.25rem}
+.feature-card .fc-icon{width:32px;height:32px;background:rgba(61,122,86,.2);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;font-size:15px}
+.feature-card .fc-title{font-size:13px;font-weight:500;color:var(--white);margin-bottom:.4rem}
+.feature-card .fc-desc{font-size:12px;color:rgba(255,255,255,.4);line-height:1.6}
+
+/* ── Component: Will Rule ── */
+.rule-card{background:var(--white);border:1px solid var(--mist-3);border-radius:var(--r-md);padding:14px 16px;margin-bottom:8px}
+.rule-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.rule-name{font-size:13px;font-weight:500;color:var(--ink)}
+.rule-desc{font-size:12px;color:var(--ink-3);opacity:.55;line-height:1.5}
+.rule-action{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:2px 9px;border-radius:6px}
+.ra-transfer{background:var(--slate-l);color:var(--slate)}
+.ra-delete{background:var(--rose-l);color:var(--rose)}
+.ra-archive{background:var(--gold-l);color:var(--gold)}
+.ra-message{background:var(--sage-l);color:var(--sage-2)}
+
+/* ── Component: Alert ── */
+.alert{display:flex;gap:12px;padding:12px 16px;border-radius:var(--r-md);border:1px solid;margin-bottom:8px}
+.alert-icon{flex-shrink:0;font-size:15px;margin-top:1px}
+.alert-body .alert-title{font-size:13px;font-weight:500;margin-bottom:2px}
+.alert-body .alert-text{font-size:12px;opacity:.7;line-height:1.5}
+.alert-sage{background:var(--sage-l);border-color:rgba(61,122,86,.25);color:var(--sage)}
+.alert-gold{background:var(--gold-l);border-color:rgba(139,105,20,.25);color:var(--gold)}
+.alert-rose{background:var(--rose-l);border-color:rgba(139,43,58,.25);color:var(--rose)}
+
+/* ── Motion spec ── */
+.motion-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.motion-pill{padding:6px 14px;border-radius:20px;background:var(--white);border:1px solid var(--mist-3);font-size:12px;color:var(--ink-3)}
+.motion-pill span{font-weight:600;color:var(--ink)}
+
+/* ── Icon grid ── */
+.icon-grid{display:flex;flex-wrap:wrap;gap:8px}
+.icon-item{width:52px;height:52px;background:var(--white);border:1px solid var(--mist-3);border-radius:var(--r-sm);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:18px}
+.icon-item span{font-size:9px;color:var(--ink-3);opacity:.5}
+
+/* ── Screen mockup ── */
+.screen{border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid rgba(0,0,0,.08)}
+.screen-bar{background:var(--ink);height:36px;display:flex;align-items:center;padding:0 16px;gap:6px}
+.sb-dot{width:10px;height:10px;border-radius:50%}
+.sidebar{background:var(--ink-2);width:200px;flex-shrink:0;padding:1rem}
+.sidebar-logo{font-family:var(--serif);font-size:16px;color:var(--white);font-style:italic;margin-bottom:1.5rem}
+.sidebar-section{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.5rem;margin-top:1rem}
+.sidebar-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:2px}
+.sidebar-item.active{background:rgba(255,255,255,.08);color:var(--white)}
+.sidebar-item .si-icon{font-size:13px;width:18px;text-align:center}
+.main-area{flex:1;background:var(--mist);padding:1.5rem;overflow:hidden}
+.ma-title{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin-bottom:.25rem}
+.ma-sub{font-size:12px;color:var(--ink-3);opacity:.5;margin-bottom:1.2rem}
+.screen-body{display:flex;height:340px}
+.progress-bar-wrap{background:var(--mist-2);border-radius:4px;height:6px;margin-bottom:8px;overflow:hidden}
+.progress-bar-fill{background:var(--sage-2);height:100%;border-radius:4px}
+.checklist-item{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--white);border:1px solid var(--mist-3);border-radius:var(--r-sm);margin-bottom:6px;font-size:12px;color:var(--ink)}
+.check-circle{width:18px;height:18px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.check-done{background:var(--sage-2);color:white}
+.check-pending{border:1.5px solid var(--mist-3);background:transparent}
+.divider-line{border:none;border-top:1px solid var(--mist-3);margin:1.5rem 0}
+.tag-strip{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.2rem}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<!-- ── COVER ─────────────────────────────────────────── -->
+<div class="cover">
+  <div class="cover-tag"><div class="cover-dot"></div>Design Document v1.0</div>
+  <h1>DataWill<br><em>Design Language</em></h1>
+  <p class="cover-sub">A visual system built for trust, gravity, and warmth — drawn from Stripe's architectural authority and Superlist's human-first aesthetic.</p>
+  <div class="cover-meta">
+    <div class="meta-item"><div class="label">Status</div><div class="value">Approved</div></div>
+    <div class="meta-item"><div class="label">Version</div><div class="value">1.0 — April 2025</div></div>
+    <div class="meta-item"><div class="label">Influences</div><div class="value">Stripe, Superlist</div></div>
+    <div class="meta-item"><div class="label">Platform</div><div class="value">Web + PWA</div></div>
+  </div>
+</div>
+
+<!-- ── 1. DESIGN PHILOSOPHY ───────────────────────────── -->
+<div class="section">
+  <div class="section-label">01 — Design Philosophy</div>
+  <h2>Gravity without coldness.</h2>
+  <p class="body">DataWill sits at the intersection of legal infrastructure and personal legacy. The design must hold two things in tension: the authority of a financial institution and the warmth of a letter written to someone you love.</p>
+  <p class="body">From <strong>Stripe</strong>: deep architectural surfaces, editorial typographic scale, structured information hierarchy, and the signal of trust through restraint. From <strong>Superlist</strong>: generous breathing room, serif warmth, human-centric copy framing, and the sense that a real person made this for you.</p>
+  <div class="serif-quote">"Design for the moment someone opens this after losing a parent. It should feel like a calm, trusted guide — not a bank, not a chatbot, not a startup."</div>
+  <div class="grid-3" style="margin-top:1rem">
+    <div class="card-sm"><h3 style="margin-bottom:.4rem">Trustworthy</h3><p class="body" style="margin:0;font-size:12px">Every surface signals security. Dark ink backgrounds, structured data tables, cryptographic honesty in copy.</p></div>
+    <div class="card-sm"><h3 style="margin-bottom:.4rem">Warm</h3><p class="body" style="margin:0;font-size:12px">Serif headlines. Cream surfaces. Generous spacing. The tactile quality of a well-made physical document.</p></div>
+    <div class="card-sm"><h3 style="margin-bottom:.4rem">Calm</h3><p class="body" style="margin:0;font-size:12px">No urgency patterns, no red warnings without reason, no dark UX. Every interaction is unhurried and clear.</p></div>
+  </div>
+</div>
+
+<hr class="divider-line">
+
+<!-- ── 2. COLOR SYSTEM ─────────────────────────────────── -->
+<div class="section">
+  <div class="section-label">02 — Color System</div>
+  <h2>Four axes. One voice.</h2>
+  <p class="body">DataWill uses a four-axis palette: Ink (authority), Mist (warmth), Sage (trust/action), and three semantic accents. Every color carries meaning.</p>
+
+  <h3 style="margin-top:1.2rem">Ink — Authority surfaces</h3>
+  <div class="swatch-row">
+    <div class="swatch swatch-dark" style="background:#0D1117"><div class="swatch-name">Ink 900</div><div class="swatch-hex">#0D1117</div></div>
+    <div class="swatch swatch-dark" style="background:#1C2333"><div class="swatch-name">Ink 800</div><div class="swatch-hex">#1C2333</div></div>
+    <div class="swatch swatch-dark" style="background:#2D3748"><div class="swatch-name">Ink 600</div><div class="swatch-hex">#2D3748</div></div>
+    <div class="swatch swatch-dark" style="background:#4A5568"><div class="swatch-name">Ink 400</div><div class="swatch-hex">#4A5568</div></div>
+    <div class="swatch swatch-dark" style="background:#718096"><div class="swatch-name">Ink 200</div><div class="swatch-hex">#718096</div></div>
+  </div>
+
+  <h3>Mist — Warm neutral surfaces</h3>
+  <div class="swatch-row">
+    <div class="swatch swatch-light" style="background:#FFFFFF;border:1px solid #DDD"><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div></div>
+    <div class="swatch swatch-light" style="background:#F7F5F0"><div class="swatch-name">Mist 50</div><div class="swatch-hex">#F7F5F0</div></div>
+    <div class="swatch swatch-light" style="background:#EDE9E1"><div class="swatch-name">Mist 100</div><div class="swatch-hex">#EDE9E1</div></div>
+    <div class="swatch swatch-light" style="background:#DDD8CE"><div class="swatch-name">Mist 200</div><div class="swatch-hex">#DDD8CE</div></div>
+    <div class="swatch swatch-light" style="background:#B8B2A5"><div class="swatch-name">Mist 400</div><div class="swatch-hex">#B8B2A5</div></div>
+  </div>
+
+  <h3>Sage — Primary action & trust</h3>
+  <div class="swatch-row">
+    <div class="swatch swatch-light" style="background:#E8F2EC"><div class="swatch-name">Sage 50</div><div class="swatch-hex">#E8F2EC</div></div>
+    <div class="swatch swatch-light" style="background:#A8D4B8"><div class="swatch-name">Sage 200</div><div class="swatch-hex">#A8D4B8</div></div>
+    <div class="swatch swatch-dark" style="background:#3D7A56"><div class="swatch-name">Sage 400</div><div class="swatch-hex">#3D7A56</div></div>
+    <div class="swatch swatch-dark" style="background:#2D5A40"><div class="swatch-name">Sage 600</div><div class="swatch-hex">#2D5A40</div></div>
+    <div class="swatch swatch-dark" style="background:#1A3A2A"><div class="swatch-name">Sage 800</div><div class="swatch-hex">#1A3A2A</div></div>
+  </div>
+
+  <h3>Semantic accents</h3>
+  <div class="swatch-row">
+    <div class="swatch swatch-dark" style="background:#2B4068"><div class="swatch-name">Slate (info)</div><div class="swatch-hex">#2B4068</div></div>
+    <div class="swatch swatch-dark" style="background:#8B6914"><div class="swatch-name">Gold (warn)</div><div class="swatch-hex">#8B6914</div></div>
+    <div class="swatch swatch-dark" style="background:#8B2B3A"><div class="swatch-name">Rose (danger)</div><div class="swatch-hex">#8B2B3A</div></div>
+    <div class="swatch swatch-dark" style="background:#7AC4A0"><div class="swatch-name">Sage light (dark-mode accent)</div><div class="swatch-hex">#7AC4A0</div></div>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h3>Color usage rules</h3>
+    <div class="grid-2" style="margin-top:.8rem">
+      <div><p class="body" style="font-size:12px;margin-bottom:6px"><strong>Backgrounds:</strong> Ink 900 for hero/dark sections; Mist 50 for page bg; White for cards.</p>
+      <p class="body" style="font-size:12px;margin-bottom:6px"><strong>Actions:</strong> Sage 600 for all primary CTAs. Never use Sage on dark backgrounds — use White or Sage light (#7AC4A0) instead.</p></div>
+      <div><p class="body" style="font-size:12px;margin-bottom:6px"><strong>Semantic:</strong> Slate for informational states; Gold for caution; Rose sparingly — only for destructive or irreversible actions.</p>
+      <p class="body" style="font-size:12px;margin-bottom:6px"><strong>Never:</strong> No pure #000 text on white. No bright saturated accent colors. No color-only meaning — always pair with text or icon.</p></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-line">
+
+<!-- ── 3. TYPOGRAPHY ──────────────────────────────────── -->
+<div class="section">
+  <div class="section-label">03 — Typography</div>
+  <h2>Two voices, one document.</h2>
+  <p class="body">Instrument Serif carries the emotional weight — headlines, quotes, key numbers. DM Sans does the structural work — body, labels, UI. Together they feel like a well-designed estate document, not a SaaS dashboard.</p>
+
+  <div class="type-row">
+    <span style="font-family:'Instrument Serif',serif;font-size:48px;color:var(--ink);line-height:1">Your digital legacy, <em style="font-style:italic;color:var(--sage-2)">protected.</em></span>
+    <span class="type-meta">Instrument Serif / 48px / Hero H1</span>
+  </div>
+  <div class="type-row">
+    <span style="font-family:'Instrument Serif',serif;font-size:32px;color:var(--ink);line-height:1.1">Asset Registry — 12 assets linked</span>
+    <span class="type-meta">Instrument Serif / 32px / H2</span>
+  </div>
+  <div class="type-row">
+    <span style="font-family:'DM Sans',sans-serif;font-size:20px;font-weight:500;color:var(--ink)">Will authoring</span>
+    <span class="type-meta">DM Sans / 20px / 500 / H3</span>
+  </div>
+  <div class="type-row">
+    <span style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:400;color:var(--ink-3);line-height:1.7">Assign each asset a rule. Every account, file, and piece of intellectual property can be transferred, deleted, archived, or scheduled for message delivery on your terms.</span>
+    <span class="type-meta">DM Sans / 15px / 400 / Body</span>
+  </div>
+  <div class="type-row">
+    <span style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);opacity:.5">Asset type — Social media</span>
+    <span class="type-meta">DM Sans / 12px / 500 / Label uppercase</span>
+  </div>
+  <div class="type-row">
+    <span style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:400;color:var(--ink-3);opacity:.5">Last updated 3 hours ago · Synced</span>
+    <span class="type-meta">DM Sans / 11px / 400 / Caption</span>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <h3>Typography rules</h3>
+    <div class="grid-2" style="margin-top:.8rem">
+      <div><p class="body" style="font-size:12px;margin-bottom:4px"><strong>Serif for emotion:</strong> All H1/H2 headings, large numbers (stats), quotes, section titles.</p>
+      <p class="body" style="font-size:12px;margin-bottom:4px"><strong>Sans for structure:</strong> Body text, UI labels, navigation, buttons, form fields, data tables.</p></div>
+      <div><p class="body" style="font-size:12px;margin-bottom:4px"><strong>Line height:</strong> 1.05 for display, 1.3 for subheadings, 1.75 for body, 1.6 for UI text.</p>
+      <p class="body" style="font-size:12px;margin-bottom:4px"><strong>Never:</strong> No justified text. No letter-spacing on body text. No bold serif. Italic serif only for emphasis in headlines.</p></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-line">
+
+<!-- ── 4. SPACING & LAYOUT ─────────────────────────────── -->
+<div class="section">
+  <div class="section-label">04 — Spacing & Layout</div>
+  <h2>A 4px base grid.</h2>
+  <p class="body">All spacing is derived from a 4px base. Components use multiples of 4. Section-level whitespace uses multiples of 8. The max content width is 1100px; dashboard sidebars are 220px.</p>
+
+  <div style="margin-top:1rem">
+    <div class="spacing-row"><div class="spacing-bar" style="width:4px"></div><div class="spacing-label"><strong>4px</strong> — tight inline gap (icon-to-label, badge-to-dot)</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:8px"></div><div class="spacing-label"><strong>8px</strong> — component internal gap (input padding-y, button gap)</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:16px"></div><div class="spacing-label"><strong>16px</strong> — card internal padding, list item separation</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:24px"></div><div class="spacing-label"><strong>24px</strong> — card padding (standard), grid gap</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:40px"></div><div class="spacing-label"><strong>40px</strong> — section separation (within a page view)</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:80px"></div><div class="spacing-label"><strong>80px</strong> — major section separation (landing page blocks)</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:120px"></div><div class="spacing-label"><strong>120px</strong> — hero vertical padding</div></div>
+  </div>
+
+  <div class="grid-2" style="margin-top:1.2rem">
+    <div class="card-sm"><h3 style="margin-bottom:.5rem">Breakpoints</h3>
+      <p class="body" style="font-size:12px;margin-bottom:3px">Mobile: 0–767px (single column)</p>
+      <p class="body" style="font-size:12px;margin-bottom:3px">Tablet: 768–1023px (2 column max)</p>
+      <p class="body" style="font-size:12px">Desktop: 1024px+ (full layout)</p>
+    </div>
+    <div class="card-sm"><h3 style="margin-bottom:.5rem">Grid system</h3>
+      <p class="body" style="font-size:12px;margin-bottom:3px">12-column grid, 24px gutter</p>
+      <p class="body" style="font-size:12px;margin-bottom:3px">Dashboard: 220px sidebar + fluid main</p>
+      <p class="body" style="font-size:12px">Marketing: max-width 1100px, centered</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-line">
+
+<!-- ── 5. COMPONENT LIBRARY ───────────────────────────── -->
+<div class="section">
+  <div class="section-label">05 — Component Library</div>
+  <h2>Atoms to organisms.</h2>
+
+  <h3 style="margin-bottom:.8rem">Buttons</h3>
+  <div class="card" style="margin-bottom:1rem">
+    <div class="btns-row" style="margin-bottom:.8rem">
+      <button class="btn-primary">Get started</button>
+      <button class="btn-secondary">Learn more</button>
+      <button class="btn-ghost">View all assets →</button>
+      <button class="btn-danger">Delete account</button>
+    </div>
+    <div class="btns-row">
+      <button class="btn-dark">Download will PDF</button>
+    </div>
+    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--mist-3)">
+      <p class="body" style="font-size:11px;color:var(--ink-3);opacity:.6;margin:0"><strong>Rules:</strong> Primary (sage) for the single most important action per view. Secondary for co-equal actions. Ghost for inline navigation. Danger only for destructive/irreversible actions — never style regular actions as danger.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:.8rem">Badges & status labels</h3>
+  <div class="card" style="margin-bottom:1rem">
+    <div class="tag-strip">
+      <span class="badge badge-sage"><span class="badge-dot"></span>Verified</span>
+      <span class="badge badge-gold"><span class="badge-dot"></span>Pending</span>
+      <span class="badge badge-slate"><span class="badge-dot"></span>In progress</span>
+      <span class="badge badge-rose"><span class="badge-dot"></span>Attention required</span>
+      <span class="badge" style="background:var(--mist-2);color:var(--ink-3)">Inactive</span>
+    </div>
+    <p class="body" style="font-size:11px;color:var(--ink-3);opacity:.6;margin-top:.8rem;margin-bottom:0"><strong>Rules:</strong> Always pair color with a label — no color-only status. Dot indicates live state; no dot for static classification badges.</p>
+  </div>
+
+  <h3 style="margin-bottom:.8rem">Form elements</h3>
+  <div class="card" style="margin-bottom:1rem">
+    <div class="grid-2">
+      <div>
+        <div class="input-group">
+          <label class="input-label">Full name</label>
+          <input class="input" type="text" placeholder="Arjun Mehta" value="Arjun Mehta">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Asset name</label>
+          <input class="input" type="text" placeholder="Google Photos">
+          <div class="input-hint">This name appears in your will summary.</div>
+        </div>
+      </div>
+      <div>
+        <div class="input-group">
+          <label class="input-label">Email address</label>
+          <input class="input" type="email" placeholder="arjun@example.com" style="border-color:var(--sage-3);box-shadow:0 0 0 3px rgba(61,122,86,.12)">
+          <div class="input-hint" style="color:var(--sage-2)">Focus state — sage ring</div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Platform</label>
+          <input class="input" type="text" placeholder="Select platform..." style="border-color:var(--rose);box-shadow:0 0 0 3px rgba(139,43,58,.1)">
+          <div class="input-hint" style="color:var(--rose)">Error state — rose ring + text</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:.8rem">Stat cards</h3>
+  <div class="grid-4" style="margin-bottom:1rem">
+    <div class="stat-card"><div class="stat-n">12</div><div class="stat-l">Assets linked</div></div>
+    <div class="stat-card"><div class="stat-n">8</div><div class="stat-l">Rules written</div></div>
+    <div class="stat-card"><div class="stat-n" style="color:var(--sage-2)">3</div><div class="stat-l">Trusted contacts</div></div>
+    <div class="stat-card"><div class="stat-n" style="color:var(--gold)">2</div><div class="stat-l">Pending review</div></div>
+  </div>
+
+  <h3 style="margin-bottom:.8rem">Asset cards</h3>
+  <div class="grid-2" style="margin-bottom:1rem">
+    <div class="asset-card">
+      <div class="asset-icon" style="background:#E8F0FE">📷</div>
+      <div class="asset-info"><div class="asset-name">Google Photos</div><div class="asset-sub">28,400 photos · 45 GB</div></div>
+      <span class="badge badge-sage" style="font-size:10px"><span class="badge-dot"></span>Linked</span>
+    </div>
+    <div class="asset-card">
+      <div class="asset-icon" style="background:#FEF3E8">₿</div>
+      <div class="asset-info"><div class="asset-name">Bitcoin wallet</div><div class="asset-sub">bc1q... · Manual entry</div></div>
+      <span class="badge badge-gold" style="font-size:10px"><span class="badge-dot"></span>Pending</span>
+    </div>
+    <div class="asset-card">
+      <div class="asset-icon" style="background:#EAF0FA">🐦</div>
+      <div class="asset-info"><div class="asset-name">Twitter / X</div><div class="asset-sub">@arjunm · 2.1K followers</div></div>
+      <span class="badge badge-slate" style="font-size:10px"><span class="badge-dot"></span>Rule set</span>
+    </div>
+    <div class="asset-card">
+      <div class="asset-icon" style="background:#FAE8EB">⚠</div>
+      <div class="asset-info"><div class="asset-name">Substack</div><div class="asset-sub">arjun.substack.com</div></div>
+      <span class="badge badge-rose" style="font-size:10px"><span class="badge-dot"></span>Needs rule</span>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:.8rem">Will rule cards</h3>
+  <div style="margin-bottom:1rem">
+    <div class="rule-card">
+      <div class="rule-head"><div class="rule-name">Google Photos</div><span class="rule-action ra-transfer">→ Transfer</span></div>
+      <div class="rule-desc">Transfer to Meera Mehta (daughter) · Full access, permanent ownership</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-head"><div class="rule-name">Twitter / X</div><span class="rule-action ra-delete">✕ Delete</span></div>
+      <div class="rule-desc">Permanent account deletion · GDPR Art. 17 request auto-sent on execution</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-head"><div class="rule-name">Substack archive</div><span class="rule-action ra-archive">◎ Archive</span></div>
+      <div class="rule-desc">Transfer to IPFS permanent storage · Read-only public access</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-head"><div class="rule-name">Final letter to family</div><span class="rule-action ra-message">✉ Scheduled</span></div>
+      <div class="rule-desc">Deliver on 1st anniversary · Email to all registered family contacts</div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:.8rem">Alerts</h3>
+  <div class="alert alert-sage">
+    <div class="alert-icon">✓</div>
+    <div class="alert-body"><div class="alert-title">Will executed successfully</div><div class="alert-text">8 of 8 rules have been processed. All instructions are complete.</div></div>
+  </div>
+  <div class="alert alert-gold">
+    <div class="alert-icon">!</div>
+    <div class="alert-body"><div class="alert-title">Check-in overdue by 3 days</div><div class="alert-text">Your quarterly check-in is overdue. Log in to confirm you're active and prevent trusted contacts from being notified.</div></div>
+  </div>
+  <div class="alert alert-rose">
+    <div class="alert-icon">✗</div>
+    <div class="alert-body"><div class="alert-title">Account deletion failed</div><div class="alert-text">Instagram rejected the deletion request. A manual intervention package has been generated for your executor.</div></div>
+  </div>
+</div>
+
+<hr class="divider-line">
+
+<!-- ── 6. MOTION ───────────────────────────────────────── -->
+<div class="section">
+  <div class="section-label">06 — Motion & Interaction</div>
+  <h2>Calm, unhurried motion.</h2>
+  <p class="body">DataWill deals with sensitive, sometimes emotionally heavy moments. Motion is deliberate and calm — never bouncy, never urgent-feeling. Every transition signals stability.</p>
+  <div class="grid-2" style="margin-top:1rem">
+    <div class="card-sm">
+      <h3 style="margin-bottom:.8rem">Duration tokens</h3>
+      <div class="motion-row"><div class="motion-pill">instant <span>0ms</span></div><div class="motion-pill">fast <span>120ms</span></div><div class="motion-pill">base <span>200ms</span></div><div class="motion-pill">slow <span>350ms</span></div><div class="motion-pill">enter <span>500ms</span></div></div>
+    </div>
+    <div class="card-sm">
+      <h3 style="margin-bottom:.8rem">Easing tokens</h3>
+      <div class="motion-row"><div class="motion-pill">ease-out <span>cubic-bezier(.16,1,.3,1)</span></div></div>
+      <div class="motion-row"><div class="motion-pill">ease-in-out <span>cubic-bezier(.4,0,.2,1)</span></div></div>
+      <div class="motion-row"><div class="motion-pill">spring <span>cubic-bezier(.34,1.56,.64,1)</span></div></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1rem">
+    <h3 style="margin-bottom:.8rem">Interaction patterns</h3>
+    <div class="grid-2">
+      <div>
+        <p class="body" style="font-size:12px;margin-bottom:6px"><strong>Page transitions:</strong> Fade-in at 500ms ease-out. No slides, no dramatic reveals. Content appears calmly.</p>
+        <p class="body" style="font-size:12px;margin-bottom:6px"><strong>Button hover:</strong> Background lightens/darkens 8% at 120ms. No scale transforms on primary buttons.</p>
+        <p class="body" style="font-size:12px"><strong>Cards:</strong> 2px translateY lift + shadow increase on hover, 200ms ease-out. Subtle, tactile.</p>
+      </div>
+      <div>
+        <p class="body" style="font-size:12px;margin-bottom:6px"><strong>Form focus:</strong> Sage ring expands from 0 to 3px over 200ms. Never jumpy.</p>
+        <p class="body" style="font-size:12px;margin-bottom:6px"><strong>Loading states:</strong> Skeleton screens (never spinners) using mist-2 with a slow shimmer. Signals stability.</p>
+        <p class="body" style="font-size:12px"><strong>Execution events:</strong> Rule status changes use a slow 500ms green fill animation — solemn, not celebratory.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-line">
+
+<!-- ── 7. ICONOGRAPHY ─────────────────────────────────── -->
+<div class="section">
+  <div class="section-label">07 — Iconography</div>
+  <h2>Outlined, precise, restrained.</h2>
+  <p class="body">Use <strong>Phosphor Icons</strong> (thin or regular weight). Never filled icons except for critical status indicators. Size: 16px in UI, 20px in headers, 24px in empty states. Color: always Ink 400 or a semantic color — never pure black.</p>
+  <div class="card" style="margin-top:.8rem">
+    <div class="icon-grid">
+      <div class="icon-item">🔐<span>lock</span></div>
+      <div class="icon-item">📋<span>will</span></div>
+      <div class="icon-item">🔗<span>link</span></div>
+      <div class="icon-item">👤<span>contact</span></div>
+      <div class="icon-item">📧<span>message</span></div>
+      <div class="icon-item">🗄️<span>archive</span></div>
+      <div class="icon-item">🗑️<span>delete</span></div>
+      <div class="icon-item">📤<span>transfer</span></div>
+      <div class="icon-item">🔔<span>alert</span></div>
+      <div class="icon-item">✅<span>verified</span></div>
+      <div class="icon-item">⚙️<span>settings</span></div>
+      <div class="icon-item">📊<span>audit</span></div>
+    </div>
+    <p class="body" style="font-size:11px;color:var(--ink-3);opacity:.5;margin-top:.8rem;margin-bottom:0">All icons from Phosphor Icons. Use <code>regular</code> weight at 16px, <code>thin</code> at 20px+.</p>
+  </div>
+</div>
+
+<hr class="divider-line">
+
+<!-- ── 8. MARKETING SCREEN ─────────────────────────────── -->
+<div class="section">
+  <div class="section-label">08 — Marketing: Hero Screen</div>
+  <h2>The landing page pattern.</h2>
+  <p class="body">The hero uses the full-dark Ink surface (Stripe's authority) combined with Instrument Serif's warmth (Superlist's humanity). Feature cards sit below in a 3-column grid on the dark surface.</p>
+  <div class="screen" style="margin-top:1rem">
+    <div class="nav-demo">
+      <span class="nav-logo">DataWill</span>
+      <ul class="nav-links">
+        <li><a href="#">How it works</a></li>
+        <li><a href="#" class="active">Security</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">For attorneys</a></li>
+      </ul>
+      <div class="nav-cta">
+        <button class="btn-secondary" style="padding:7px 16px;font-size:13px;border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.7);background:transparent">Sign in</button>
+        <button class="btn-primary" style="padding:7px 16px;font-size:13px">Start your will</button>
+      </div>
+    </div>
+    <div class="hero-demo">
+      <div class="hero-eyebrow">Digital estate planning, finally done right</div>
+      <h1 class="hero-h">Your digital life,<br><em>on your terms.</em></h1>
+      <p class="hero-body">Register every account, file, and asset you own. Write rules for each one. DataWill executes them exactly as intended — automatically, cryptographically, and privately.</p>
+      <div class="hero-btns">
+        <button class="btn-dark">Start for free</button>
+        <button class="btn-secondary" style="border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.55);background:transparent;padding:10px 18px;font-size:14px">See how it works →</button>
+      </div>
+      <div class="grid-3" style="margin-top:2rem">
+        <div class="feature-card"><div class="fc-icon">🔐</div><div class="fc-title">Zero-knowledge encrypted</div><div class="fc-desc">Your will contents are never readable by DataWill staff. Encrypted client-side.</div></div>
+        <div class="feature-card"><div class="fc-icon">⚡</div><div class="fc-title">Automatic execution</div><div class="fc-desc">Rules run the moment death is verified. No family intervention required.</div></div>
+        <div class="feature-card"><div class="fc-icon">🤖</div><div class="fc-title">AI training opt-out</div><div class="fc-desc">The only platform with enforceable post-mortem AI consent controls.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-line">
+
+<!-- ── 9. DASHBOARD SCREEN ─────────────────────────────── -->
+<div class="section">
+  <div class="section-label">09 — App: Dashboard Screen</div>
+  <h2>The product pattern.</h2>
+  <p class="body">The authenticated app uses a dark sidebar (Stripe's structural authority) with a warm Mist main area (Superlist's personal warmth). The contrast creates a clear reading zone.</p>
+  <div class="screen" style="margin-top:1rem">
+    <div class="screen-bar">
+      <div class="sb-dot" style="background:#FF5F57"></div>
+      <div class="sb-dot" style="background:#FEBC2E"></div>
+      <div class="sb-dot" style="background:#28C840"></div>
+    </div>
+    <div class="screen-body">
+      <div class="sidebar">
+        <div class="sidebar-logo">DataWill</div>
+        <div class="sidebar-section">Overview</div>
+        <div class="sidebar-item active"><div class="si-icon">🏠</div>Dashboard</div>
+        <div class="sidebar-item"><div class="si-icon">📦</div>Assets</div>
+        <div class="sidebar-item"><div class="si-icon">📋</div>My Will</div>
+        <div class="sidebar-section">People</div>
+        <div class="sidebar-item"><div class="si-icon">👤</div>Contacts</div>
+        <div class="sidebar-item"><div class="si-icon">🔑</div>Trusted contacts</div>
+        <div class="sidebar-section">Security</div>
+        <div class="sidebar-item"><div class="si-icon">🔐</div>Encryption</div>
+        <div class="sidebar-item"><div class="si-icon">📜</div>Audit log</div>
+        <div class="sidebar-item" style="margin-top:auto"><div class="si-icon">⚙️</div>Settings</div>
+      </div>
+      <div class="main-area">
+        <div class="ma-title">Good morning, Arjun.</div>
+        <div class="ma-sub">Your will is 67% complete. 4 assets still need rules.</div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:67%"></div></div>
+        <div class="grid-4" style="margin-bottom:1rem">
+          <div class="stat-card" style="padding:.8rem"><div class="stat-n" style="font-size:24px">12</div><div class="stat-l">Assets</div></div>
+          <div class="stat-card" style="padding:.8rem"><div class="stat-n" style="font-size:24px">8</div><div class="stat-l">Rules</div></div>
+          <div class="stat-card" style="padding:.8rem"><div class="stat-n" style="font-size:24px;color:var(--sage-2)">3</div><div class="stat-l">Contacts</div></div>
+          <div class="stat-card" style="padding:.8rem"><div class="stat-n" style="font-size:24px;color:var(--gold)">4</div><div class="stat-l">Need rules</div></div>
+        </div>
+        <div class="checklist-item"><div class="check-circle check-done">✓</div>Connect primary accounts</div>
+        <div class="checklist-item"><div class="check-circle check-done">✓</div>Add trusted contacts</div>
+        <div class="checklist-item"><div class="check-circle check-done">✓</div>Enable encryption</div>
+        <div class="checklist-item"><div class="check-circle check-pending"></div><span style="color:var(--ink-3);opacity:.6">Write rules for remaining assets</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider-line">
+
+<!-- ── 10. VOICE & TONE ────────────────────────────────── -->
+<div class="section">
+  <div class="section-label">10 — Voice & Tone</div>
+  <h2>Honest, warm, precise.</h2>
+  <p class="body">DataWill's copy voice is drawn from Superlist's human-first tone, grounded in Stripe's technical precision. Never euphemistic about death — but never clinical either. Speak as a trusted advisor, not a legal document.</p>
+  <div class="grid-2" style="margin-top:1rem">
+    <div class="card-sm">
+      <h3 style="margin-bottom:.6rem;color:var(--sage-2)">Write like this</h3>
+      <p class="body" style="font-size:12px;margin-bottom:4px">"Your will is executed the moment your death is verified."</p>
+      <p class="body" style="font-size:12px;margin-bottom:4px">"Add a trusted contact — someone who can confirm your death and hold a recovery key."</p>
+      <p class="body" style="font-size:12px">"Your photos will go to your daughter. Exactly as you intended."</p>
+    </div>
+    <div class="card-sm">
+      <h3 style="margin-bottom:.6rem;color:var(--rose)">Never write like this</h3>
+      <p class="body" style="font-size:12px;margin-bottom:4px">"In the event of your passing..." (euphemistic)</p>
+      <p class="body" style="font-size:12px;margin-bottom:4px">"Pursuant to the activation of the death verification protocol..." (cold/legal)</p>
+      <p class="body" style="font-size:12px">"Your assets are now at risk! Complete your will today!" (urgency dark pattern)</p>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

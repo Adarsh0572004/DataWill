@@ -1,0 +1,25 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+.badge__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: currentColor;
+  flex-shrink: 0;
+}
+
+.badge--sage   { background: var(--sage-l); color: var(--sage-2); }
+.badge--gold   { background: var(--gold-l); color: var(--gold); }
+.badge--slate  { background: var(--slate-l); color: var(--slate); }
+.badge--rose   { background: var(--rose-l); color: var(--rose); }
+.badge--neutral { background: var(--mist-2); color: var(--ink-3); }

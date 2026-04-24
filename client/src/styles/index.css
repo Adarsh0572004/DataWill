@@ -1,0 +1,52 @@
+/* ══════════════════════════════════════════════════════════
+   DataWill Global Styles
+   Import order matters: tokens → reset → typography → animations
+   ══════════════════════════════════════════════════════════ */
+
+@import './variables.css';
+@import './reset.css';
+@import './typography.css';
+@import './animations.css';
+
+/* ── Utility classes ── */
+.container {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--mist-3);
+  margin: var(--sp-6) 0;
+}

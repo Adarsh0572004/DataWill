@@ -1,0 +1,85 @@
+/* ══════════════════════════════════════════════════════════
+   DataWill CSS Reset
+   ══════════════════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--sans);
+  background-color: var(--mist);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mist-3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mist-4);
+}
+
+/* ── Responsive grid overrides ── */
+@media (max-width: 767px) {
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+  .dashboard-layout__content {
+    padding: 1.25rem 1rem;
+    padding-top: 3.5rem; /* space for hamburger */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+}

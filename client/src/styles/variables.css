@@ -1,0 +1,81 @@
+/* ══════════════════════════════════════════════════════════
+   DataWill Design Tokens
+   Source: Design Document v1.0
+   ══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Ink — Authority surfaces ── */
+  --ink:       #0D1117;
+  --ink-2:     #1C2333;
+  --ink-3:     #2D3748;
+  --ink-4:     #4A5568;
+  --ink-5:     #718096;
+
+  /* ── Mist — Warm neutral surfaces ── */
+  --mist:      #F7F5F0;
+  --mist-2:    #EDE9E1;
+  --mist-3:    #DDD8CE;
+  --mist-4:    #B8B2A5;
+  --white:     #FFFFFF;
+
+  /* ── Sage — Primary action & trust ── */
+  --sage:      #1A3A2A;
+  --sage-2:    #2D5A40;
+  --sage-3:    #3D7A56;
+  --sage-4:    #A8D4B8;
+  --sage-l:    #E8F2EC;
+  --sage-dark: #7AC4A0;  /* accent for dark mode surfaces */
+
+  /* ── Semantic accents ── */
+  --gold:      #8B6914;
+  --gold-2:    #B8901C;
+  --gold-l:    #FBF4E4;
+  --slate:     #2B4068;
+  --slate-2:   #3D5A8A;
+  --slate-l:   #EAF0FA;
+  --rose:      #8B2B3A;
+  --rose-l:    #FAE8EB;
+
+  /* ── Border radius ── */
+  --r-sm:  8px;
+  --r-md:  14px;
+  --r-lg:  20px;
+  --r-xl:  28px;
+
+  /* ── Shadows ── */
+  --shadow:    0 1px 3px rgba(13, 17, 23, 0.08), 0 4px 16px rgba(13, 17, 23, 0.06);
+  --shadow-lg: 0 8px 32px rgba(13, 17, 23, 0.12), 0 2px 8px rgba(13, 17, 23, 0.06);
+
+  /* ── Typography ── */
+  --serif: 'Instrument Serif', serif;
+  --sans:  'DM Sans', sans-serif;
+
+  /* ── Spacing (4px base grid) ── */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-30: 120px;
+
+  /* ── Motion ── */
+  --duration-instant: 0ms;
+  --duration-fast:    120ms;
+  --duration-base:    200ms;
+  --duration-slow:    350ms;
+  --duration-enter:   500ms;
+
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Layout ── */
+  --sidebar-width: 220px;
+  --max-content:   1100px;
+}

@@ -1,0 +1,92 @@
+.dashboard-page__greeting {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+
+.dashboard-page__subtitle {
+  font-size: 13px;
+  color: var(--ink-3);
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
+
+.dashboard-page__progress {
+  background: var(--mist-2);
+  border-radius: 4px;
+  height: 6px;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.dashboard-page__progress-fill {
+  background: var(--sage-2);
+  height: 100%;
+  border-radius: 4px;
+  transition: width var(--duration-slow) var(--ease-out);
+}
+
+.dashboard-page__stats {
+  margin-bottom: 1rem;
+}
+
+.dashboard-page__stats .stat-card__value {
+  font-size: 24px;
+}
+
+.dashboard-page__stats .stat-card {
+  padding: 0.8rem;
+}
+
+/* Checklist */
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--white);
+  border: 1px solid var(--mist-3);
+  border-radius: var(--r-sm);
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.checklist-item__circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  border: 1.5px solid var(--mist-3);
+  background: transparent;
+}
+
+.checklist-item__circle--done {
+  background: var(--sage-2);
+  border-color: var(--sage-2);
+  color: white;
+}
+
+.checklist-item--pending {
+  color: var(--ink-3);
+  opacity: 0.5;
+}
+
+/* Check-in card */
+.dashboard-page__checkin-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--white);
+  border: 1px solid var(--mist-3);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+}
+

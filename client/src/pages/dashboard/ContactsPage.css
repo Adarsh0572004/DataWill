@@ -1,0 +1,47 @@
+.contacts-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.contacts-page__grid { margin-top: 1rem; }
+
+.contacts-page__empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: var(--white);
+  border: 1px dashed var(--mist-3);
+  border-radius: var(--r-lg);
+  margin-top: 1rem;
+}
+
+.contact-card { position: relative; }
+
+.contact-card__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.contact-card__avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--sage-l); color: var(--sage-2);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 14px; flex-shrink: 0;
+}
+
+.contact-card__name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.contact-card__email { font-size: 12px; color: var(--ink-3); opacity: 0.6; }
+
+.contact-card__meta {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+
+.contact-card__delete {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 11px; color: var(--ink-3); opacity: 0.4;
+  background: none; border: none; cursor: pointer;
+}
+.contact-card__delete:hover { color: var(--rose); opacity: 1; }

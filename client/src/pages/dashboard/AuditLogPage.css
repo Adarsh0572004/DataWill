@@ -1,0 +1,20 @@
+.audit-page__empty {
+  text-align: center; padding: 3rem 1rem; background: var(--white);
+  border: 1px dashed var(--mist-3); border-radius: var(--r-lg); margin-top: 1rem;
+}
+
+.audit-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.audit-table th {
+  text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-3); opacity: 0.5;
+  border-bottom: 1px solid var(--mist-3);
+}
+.audit-table td { padding: 10px 12px; border-bottom: 1px solid var(--mist-2); color: var(--ink); }
+.audit-table__date { color: var(--ink-3); opacity: 0.6; white-space: nowrap; font-size: 12px; }
+.audit-table__action { font-weight: 500; }
+.audit-table__details { color: var(--ink-3); opacity: 0.7; }
+.audit-table tr:last-child td { border-bottom: none; }
+
+.audit-page__pagination {
+  display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem;
+}

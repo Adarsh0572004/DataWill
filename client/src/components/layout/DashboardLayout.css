@@ -1,0 +1,23 @@
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dashboard-layout__main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  background: var(--mist);
+  min-height: 100vh;
+}
+
+.dashboard-layout__content {
+  padding: 2rem 2.5rem;
+  max-width: 1000px;
+}
+
+/* Mobile: collapse sidebar */
+@media (max-width: 767px) {
+  .dashboard-layout__main {
+    margin-left: 0;
+  }
+}
