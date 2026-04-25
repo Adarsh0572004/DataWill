@@ -55,9 +55,15 @@ const authLimiter = rateLimit({
 // CORS
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || origin.match(/^http:\/\/localhost:\d+$/)) {
-      callback(null, true);
-    } else if (process.env.NODE_ENV === 'production') {
+    // Allow requests with no origin (same-origin, static files, server-to-server)
+    if (!origin) return callback(null, true);
+    // Allow localhost in development
+    if (origin.match(/^http:\/\/localhost:\d+$/)) return callback(null, true);
+    // Allow the production domain
+    if (process.env.BETTER_AUTH_URL && origin === process.env.BETTER_AUTH_URL) return callback(null, true);
+    if (origin.includes('onrender.com')) return callback(null, true);
+    // Default: allow in dev, block in prod
+    if (process.env.NODE_ENV === 'production') {
       callback(new Error('Not allowed by CORS'));
     } else {
       callback(null, true);
