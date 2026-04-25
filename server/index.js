@@ -115,9 +115,24 @@ app.use('/api/will-pdf', willPdfRoutes);
 
 // Serve React static files in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
+  const distPath = path.join(process.cwd(), 'client', 'dist');
+  
+  // Debug route to check paths
+  app.get('/api/debug-paths', async (req, res) => {
+    const fs = await import('fs');
+    const exists = fs.existsSync(distPath);
+    const files = exists ? fs.readdirSync(distPath) : [];
+    res.json({ distPath, exists, files, cwd: process.cwd(), dirname: __dirname });
+  });
+
+  app.use(express.static(distPath));
   app.get('/{*splat}', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
+    const indexPath = path.join(distPath, 'index.html');
+    res.sendFile(indexPath, (err) => {
+      if (err) {
+        res.status(500).json({ error: 'index.html not found', path: indexPath, distPath });
+      }
+    });
   });
 } else {
   app.use((req, res) => {
