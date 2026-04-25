@@ -27,8 +27,17 @@ const checkInSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['active', 'overdue', 'snoozed'],
+    enum: ['active', 'overdue', 'snoozed', 'challenge'],
     default: 'active'
+  },
+  // 72-hour challenge window
+  challengeStartedAt: {
+    type: Date,
+    default: null
+  },
+  challengeEmailSent: {
+    type: Boolean,
+    default: false
   }
 }, { timestamps: true });
 

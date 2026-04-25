@@ -15,6 +15,7 @@ import AuditLogPage from './pages/dashboard/AuditLogPage';
 import SettingsPage from './pages/dashboard/SettingsPage';
 import MessagesPage from './pages/dashboard/MessagesPage';
 import BeneficiaryPortalPage from './pages/beneficiary/BeneficiaryPortalPage';
+import EmergencyPage from './pages/emergency/EmergencyPage';
 
 function DashboardRoutes() {
   const { user, logout } = useAuth();
@@ -53,6 +54,7 @@ function App() {
           />
 
           <Route path="/beneficiary/:token" element={<BeneficiaryPortalPage />} />
+          <Route path="/emergency" element={<EmergencyPage />} />
 
           <Route path="*" element={
             <div style={{ padding: '4rem', textAlign: 'center' }}>

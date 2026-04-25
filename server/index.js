@@ -120,6 +120,10 @@ app.use('/api/will-versions', willVersionRoutes);
 app.use('/api/beneficiary', beneficiaryRoutes);
 app.use('/api/will-pdf', willPdfRoutes);
 
+// Emergency routes (cancel is PUBLIC — no auth needed, accessible from any device)
+const { default: emergencyRoutes } = await import('./routes/emergencyRoutes.js');
+app.use('/api/emergency', emergencyRoutes);
+
 // Serve React static files in production
 if (process.env.NODE_ENV === 'production') {
   const distPath = path.join(process.cwd(), 'client', 'dist');

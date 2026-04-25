@@ -27,6 +27,12 @@ const userSchema = new mongoose.Schema({
   lastCheckIn: {
     type: Date,
     default: Date.now
+  },
+  // Hashed 6-digit emergency cancel PIN
+  emergencyPin: {
+    type: String,
+    default: null,
+    select: false
   }
 }, {
   timestamps: true  // adds createdAt, updatedAt

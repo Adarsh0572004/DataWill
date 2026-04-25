@@ -156,3 +156,50 @@ export async function sendCheckInReminder({ userEmail, userName, missedCount }) 
 
   console.log(`📧 Reminder sent to ${userEmail} (${missedCount} missed)`);
 }
+
+/**
+ * Send the 72-HOUR CHALLENGE email — LAST CHANCE before death protocol.
+ */
+export async function sendChallengeEmail({ userEmail, userName }) {
+  const mail = getTransporter();
+  const appUrl = process.env.BETTER_AUTH_URL || 'https://datawill.onrender.com';
+
+  await mail.sendMail({
+    from: process.env.SMTP_USER || process.env.GMAIL_USER || '"DataWill" <noreply@datawill.com>',
+    to: userEmail,
+    subject: `🚨 URGENT: DataWill — 72 hours to cancel credential sharing`,
+    text: `URGENT — ${userName},\n\nYou have missed 3 consecutive check-ins on DataWill.\n\n⚠️ In 72 HOURS, your stored credentials will be shared with your trusted contacts.\n\nIf you are still alive, CANCEL NOW:\n${appUrl}/emergency\n\nYou need your email and 6-digit emergency PIN to cancel.\n\nIf you cannot access your account, go to ${appUrl}/emergency from ANY device — no login required.\n\n— DataWill`,
+    html: `<div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 550px; margin: 0 auto; background: #0A0E14; color: #E6EDF3; padding: 32px; border-radius: 12px; border: 2px solid #F43F5E;">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div style="font-size: 48px; margin-bottom: 8px;">🚨</div>
+        <h1 style="color: #F43F5E; margin: 0; font-size: 24px;">LAST CHANCE</h1>
+        <p style="color: #8B949E; font-size: 14px;">72-Hour Challenge Window Active</p>
+      </div>
+      
+      <div style="background: #161B22; padding: 24px; border-radius: 8px; border: 1px solid #30363D;">
+        <p>Hi <strong>${userName}</strong>,</p>
+        <p>You have <strong>missed 3 consecutive check-ins</strong>.</p>
+        <p style="color: #F43F5E; font-weight: bold; font-size: 16px;">In 72 hours, your stored credentials will be shared with your trusted contacts.</p>
+      </div>
+
+      <div style="text-align: center; margin: 24px 0;">
+        <p style="color: #8B949E; margin-bottom: 16px;">If you are alive, cancel the protocol now:</p>
+        <a href="${appUrl}/emergency" style="display: inline-block; background: linear-gradient(135deg, #1A5C35, #2D7A4C); color: white; padding: 16px 40px; border-radius: 12px; text-decoration: none; font-size: 16px; font-weight: bold;">
+          🛑 CANCEL DEATH PROTOCOL
+        </a>
+        <p style="color: #64748B; font-size: 12px; margin-top: 12px;">No login required — just your email + 6-digit emergency PIN</p>
+      </div>
+
+      <div style="background: #1C2128; padding: 16px; border-radius: 8px; border-left: 4px solid #F59E0B;">
+        <p style="margin: 0; color: #F59E0B;"><strong>💡 Lost your phone/laptop?</strong></p>
+        <p style="color: #8B949E; margin: 8px 0 0;">Go to <code style="background: #0D1117; padding: 2px 6px; border-radius: 4px;">${appUrl}/emergency</code> from ANY device — a friend's phone, a library computer, anything.</p>
+      </div>
+
+      <p style="color: #484F58; text-align: center; font-size: 12px; margin-top: 32px;">
+        Sent by DataWill — datawill.onrender.com
+      </p>
+    </div>`
+  });
+
+  console.log(`🚨 72h CHALLENGE email sent to ${userEmail}`);
+}
