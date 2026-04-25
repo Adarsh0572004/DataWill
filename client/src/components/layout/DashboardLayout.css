@@ -6,7 +6,7 @@
 .dashboard-layout__main {
   flex: 1;
   margin-left: var(--sidebar-width);
-  background: var(--mist);
+  background: var(--bg-primary);
   min-height: 100vh;
 }
 

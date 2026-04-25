@@ -1,9 +1,21 @@
 .navbar {
-  background: var(--ink);
+  background: transparent;
   padding: 0 2rem;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar--scrolled {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 .navbar__inner {
@@ -17,34 +29,65 @@
 
 .navbar__logo {
   font-family: var(--serif);
-  font-size: 20px;
-  color: var(--white);
+  font-size: 22px;
+  color: var(--text-primary);
   font-style: italic;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s ease;
+}
+
+.navbar__logo:hover {
+  opacity: 0.8;
+}
+
+.navbar__logo-icon {
+  font-size: 14px;
+  color: var(--sage-dark);
+  font-style: normal;
 }
 
 .navbar__links {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   list-style: none;
 }
 
 .navbar__links a {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: 13.5px;
+  color: var(--text-muted);
   text-decoration: none;
-  font-weight: 400;
-  transition: color var(--duration-fast) var(--ease-out);
+  font-weight: 500;
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.2s ease;
 }
 
-.navbar__links a:hover,
-.navbar__links a.active {
-  color: var(--white);
+.navbar__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--sage-dark);
+  border-radius: 1px;
+  transition: width 0.3s var(--ease-out);
+}
+
+.navbar__links a:hover {
+  color: var(--text-primary);
+}
+
+.navbar__links a:hover::after {
+  width: 100%;
 }
 
 .navbar__cta {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
 }
 
@@ -52,5 +95,8 @@
 @media (max-width: 767px) {
   .navbar__links {
     display: none;
+  }
+  .navbar {
+    padding: 0 1rem;
   }
 }

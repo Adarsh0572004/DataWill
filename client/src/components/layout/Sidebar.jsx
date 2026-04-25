@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import ThemeToggle from '../ui/ThemeToggle';
 import './Sidebar.css';
 
 const NAV_ITEMS = [
@@ -68,6 +69,9 @@ function Sidebar({ userName = '', onLogout }) {
             <i className="sidebar__icon ph ph-gear"></i>
             Settings
           </NavLink>
+          <div style={{ padding: '8px 12px' }}>
+            <ThemeToggle />
+          </div>
           {userName && (
             <div className="sidebar__user">
               <div className="sidebar__avatar">{userName.charAt(0).toUpperCase()}</div>

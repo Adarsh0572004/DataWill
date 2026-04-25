@@ -12,8 +12,8 @@
 .assets-page__empty {
   text-align: center;
   padding: 3rem 1rem;
-  background: var(--white);
-  border: 1px dashed var(--mist-3);
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
   border-radius: var(--r-lg);
   margin-top: 1rem;
 }
@@ -22,7 +22,8 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(13, 17, 23, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,11 +32,14 @@
 }
 
 .modal-card {
-  background: var(--white);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 2rem;
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: var(--shadow-lg);
   position: relative;
 }
@@ -47,11 +51,12 @@
   background: none;
   border: none;
   font-size: 16px;
-  color: var(--ink-3);
+  color: var(--text-muted);
   cursor: pointer;
   padding: 4px;
+  transition: color 0.2s ease;
 }
 
 .modal-close:hover {
-  color: var(--ink);
+  color: var(--text-primary);
 }

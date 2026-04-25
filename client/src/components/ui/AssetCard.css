@@ -1,12 +1,21 @@
 .asset-card {
-  background: var(--white);
-  border: 1px solid var(--mist-3);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: 14px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
+  transition: transform 0.2s var(--ease-out),
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.asset-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow);
 }
 
 .asset-card__icon {
@@ -29,13 +38,12 @@
 .asset-card__name {
   font-size: 13px;
   font-weight: 500;
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
 .asset-card__sub {
   font-size: 11px;
-  color: var(--ink-3);
-  opacity: 0.5;
+  color: var(--text-muted);
   margin-top: 1px;
   white-space: nowrap;
   overflow: hidden;
