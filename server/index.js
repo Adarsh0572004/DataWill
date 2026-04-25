@@ -9,6 +9,7 @@ import { toNodeHandler } from 'better-auth/node';
 import { auth } from './auth.js';
 import connectDB from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
+import { startCheckInMonitor } from './services/checkInMonitor.js';
 
 // ESM dirname polyfill
 const __filename = fileURLToPath(import.meta.url);
@@ -153,6 +154,9 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`DataWill server running on port ${PORT}`);
   console.log(`Better Auth: ${process.env.BETTER_AUTH_URL || 'http://localhost:5000'}/api/auth`);
+
+  // Start the check-in monitor cron job
+  startCheckInMonitor();
 });
 
 export default app;

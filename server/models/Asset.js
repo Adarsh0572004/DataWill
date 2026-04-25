@@ -37,6 +37,19 @@ const assetSchema = new mongoose.Schema({
     type: String,
     default: '📦'
   },
+  // Encrypted credentials (stored as AES-256-GCM encrypted strings)
+  credentialUsername: {
+    type: String,
+    default: ''
+  },
+  credentialPassword: {
+    type: String,
+    default: ''
+  },
+  credentialNotes: {
+    type: String,
+    default: ''
+  },
   metadata: {
     type: mongoose.Schema.Types.Mixed,
     default: {}

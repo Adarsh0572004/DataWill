@@ -16,7 +16,8 @@ function AssetsPage() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editAsset, setEditAsset] = useState(null);
-  const [form, setForm] = useState({ name: '', platform: '', type: 'other' });
+  const [form, setForm] = useState({ name: '', platform: '', type: 'other', credentialUsername: '', credentialPassword: '', credentialNotes: '' });
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -35,13 +36,15 @@ function AssetsPage() {
 
   const openAdd = () => {
     setEditAsset(null);
-    setForm({ name: '', platform: '', type: 'other' });
+    setForm({ name: '', platform: '', type: 'other', credentialUsername: '', credentialPassword: '', credentialNotes: '' });
+    setShowPassword(false);
     setShowModal(true);
   };
 
   const openEdit = (asset) => {
     setEditAsset(asset);
-    setForm({ name: asset.name, platform: asset.platform, type: asset.type });
+    setForm({ name: asset.name, platform: asset.platform, type: asset.type, credentialUsername: asset.credentialUsername || '', credentialPassword: asset.credentialPassword || '', credentialNotes: asset.credentialNotes || '' });
+    setShowPassword(false);
     setShowModal(true);
   };
 
@@ -150,6 +153,44 @@ function AssetsPage() {
                   <option value="other">Other</option>
                 </select>
               </div>
+
+              {/* Credentials Section */}
+              <div style={{ marginTop: '1.5rem', padding: '16px', background: 'var(--color-surface-alt, #161B22)', borderRadius: '8px', border: '1px solid var(--color-border, #30363D)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                  <span>🔐</span>
+                  <span style={{ fontWeight: 600, fontSize: '14px' }}>Account Credentials</span>
+                  <span style={{ fontSize: '11px', color: 'var(--color-muted)', marginLeft: 'auto' }}>Encrypted with AES-256</span>
+                </div>
+                <Input
+                  label="Username / Email"
+                  placeholder="your@email.com"
+                  value={form.credentialUsername}
+                  onChange={e => setForm({ ...form, credentialUsername: e.target.value })}
+                />
+                <div style={{ position: 'relative' }}>
+                  <Input
+                    label="Password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="••••••••"
+                    value={form.credentialPassword}
+                    onChange={e => setForm({ ...form, credentialPassword: e.target.value })}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    style={{ position: 'absolute', right: '12px', top: '34px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', color: 'var(--color-muted)' }}
+                  >
+                    {showPassword ? '🙈' : '👁️'}
+                  </button>
+                </div>
+                <Input
+                  label="Notes (optional)"
+                  placeholder="Recovery email, 2FA info, security questions..."
+                  value={form.credentialNotes}
+                  onChange={e => setForm({ ...form, credentialNotes: e.target.value })}
+                />
+              </div>
+
               <div style={{ display: 'flex', gap: '8px', marginTop: '1rem' }}>
                 <Button type="submit" full>{editAsset ? 'Save changes' : 'Add asset'}</Button>
                 {editAsset && (
