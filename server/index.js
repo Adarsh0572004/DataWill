@@ -23,7 +23,10 @@ connectDB();
 const app = express();
 
 // Security middleware
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
+}));
 
 // Custom sanitize middleware (express-mongo-sanitize incompatible with Express 5)
 app.use((req, res, next) => {
