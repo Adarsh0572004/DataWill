@@ -77,7 +77,7 @@ function WillPage() {
         <div style={{ display: 'flex', gap: '8px' }}>
           <Button variant="secondary" onClick={() => {
             const token = localStorage.getItem('datawill_token');
-            fetch(`${import.meta.env.VITE_API_URL}/will-pdf`, { headers: { Authorization: `Bearer ${token}` } })
+            fetch(`${import.meta.env.VITE_API_URL || '/api'}/will-pdf`, { headers: { Authorization: `Bearer ${token}` } })
               .then(res => res.blob())
               .then(blob => {
                 const url = URL.createObjectURL(blob);

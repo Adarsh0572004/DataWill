@@ -17,7 +17,7 @@ function BeneficiaryPortalPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/beneficiary/portal/${token}`)
+    fetch(`${import.meta.env.VITE_API_URL || '/api'}/beneficiary/portal/${token}`)
       .then(res => res.json())
       .then(setData)
       .catch(() => setError('This link may have expired or is invalid.'));
