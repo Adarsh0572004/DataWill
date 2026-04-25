@@ -126,13 +126,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 
   app.use(express.static(distPath));
-  app.get('/{*splat}', (req, res) => {
+
+  // SPA fallback — only serve index.html for non-API routes that don't match a static file
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
     const indexPath = path.join(distPath, 'index.html');
-    res.sendFile(indexPath, (err) => {
-      if (err) {
-        res.status(500).json({ error: 'index.html not found', path: indexPath, distPath });
-      }
-    });
+    res.sendFile(indexPath);
   });
 } else {
   app.use((req, res) => {
